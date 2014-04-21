@@ -4,13 +4,13 @@ set -e
 
 umask 077
 
-basedir=~/.mintcoin
+basedir=~/.bltzcoin
 dbfile="$basedir/DB_CONFIG"
-cfgfile="$basedir/mintcoin.conf"
+cfgfile="$basedir/bltzcoin.conf"
 
 [ -e "$basedir" ] || mkdir "$basedir"
 
-# mintcoin does not clean up DB log files by default
+# bltzcoin does not clean up DB log files by default
 [ -e "$dbfile" ] || echo 'set_flags DB_LOG_AUTOREMOVE' > "$dbfile"
 
-exec /usr/lib/mintcoin/mintcoin-qt "$@"
+exec /usr/lib/bltzcoin/bltzcoin-qt "$@"

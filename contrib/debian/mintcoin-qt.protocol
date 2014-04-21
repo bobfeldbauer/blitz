@@ -1,6 +1,6 @@
 [Protocol]
-exec=mintcoin-qt '%u'
-protocol=mintcoin
+exec=bltzcoin-qt '%u'
+protocol=bltzcoin
 input=none
 output=none
 helper=true

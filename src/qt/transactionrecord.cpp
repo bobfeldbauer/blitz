@@ -34,7 +34,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     if (wtx.IsCoinStake())
     {
         // Stake generation
-        parts.append(TransactionRecord(hash, nTime, TransactionRecord::StakeMint, "", -nDebit, wtx.GetValueOut()));
+        parts.append(TransactionRecord(hash, nTime, TransactionRecord::StakeBlitz, "", -nDebit, wtx.GetValueOut()));
     }
     else if (nNet > 0 || wtx.IsCoinBase())
     {
@@ -197,7 +197,7 @@ void TransactionRecord::updateStatus(const CWalletTx &wtx)
     }
 
     // For generated transactions, determine maturity
-    if(type == TransactionRecord::Generated || type == TransactionRecord::StakeMint)
+    if(type == TransactionRecord::Generated || type == TransactionRecord::StakeBlitz)
     {
         int64 nCredit = wtx.GetCredit(true);
         if (nCredit == 0)

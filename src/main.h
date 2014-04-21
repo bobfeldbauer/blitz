@@ -32,11 +32,11 @@ static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const unsigned int MAX_INV_SZ = 50000;
 static const int64 MIN_TX_FEE = 10 * CENT;
 static const int64 MIN_RELAY_TX_FEE = 10 * CENT;
-static const int64 MAX_MONEY = 70000000000 * COIN;			// 70 bil
+static const int64 MAX_MONEY = 1000000000 * COIN;			// 70 bil
 static const int64 CIRCULATION_MONEY = MAX_MONEY;
 static const double TAX_PERCENTAGE = 0.01;
-static const int64 MAX_MINT_PROOF_OF_STAKE = 0.05 * COIN;	// 5% annual interest
-static const int CUTOFF_POW_BLOCK = 220000;
+static const int64 MAX_BLTZ_PROOF_OF_STAKE = 0.05 * COIN;	// 5% annual interest
+static const int CUTOFF_POW_BLOCK = 25000;
 
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 
@@ -50,8 +50,8 @@ static const int fHaveUPnP = true;
 static const int fHaveUPnP = false;
 #endif
 
-static const uint256 hashGenesisBlockOfficial("0xaf4ac34e7ef10a08fe2ba692eb9a9c08cf7e89fcf352f9ea6f0fd73ba3e5d03c");
-static const uint256 hashGenesisBlockTestNet ("0xaf4ac34e7ef10a08fe2ba692eb9a9c08cf7e89fcf352f9ea6f0fd73ba3e5d03c");
+static const uint256 hashGenesisBlockOfficial("0xafaf057ef023cb6799f554c9faef896d20eda2594b8ee02c32f165486d4751ec");
+static const uint256 hashGenesisBlockTestNet("0xc2b4cdf03c86099a0758f1c018d1a10bf05afab436c92b93b42bb88970de9821");
 
 static const int64 nMaxClockDrift = 2 * 60 * 60;        // two hours
 
@@ -1132,7 +1132,7 @@ public:
     CBigNum bnChainTrust; // ppcoin: trust score of block chain
     int nHeight;
 
-    int64 nMint;
+    int64 nBlitz;
     int64 nMoneySupply;
 
     unsigned int nFlags;  // ppcoin: block index flags
@@ -1167,7 +1167,7 @@ public:
         nBlockPos = 0;
         nHeight = 0;
         bnChainTrust = 0;
-        nMint = 0;
+        nBlitz = 0;
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
@@ -1192,7 +1192,7 @@ public:
         nBlockPos = nBlockPosIn;
         nHeight = 0;
         bnChainTrust = 0;
-        nMint = 0;
+        nBlitz = 0;
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
@@ -1330,9 +1330,9 @@ public:
 
     std::string ToString() const
     {
-        return strprintf("CBlockIndex(nprev=%p, pnext=%p, nFile=%u, nBlockPos=%-6d nHeight=%d, nMint=%s, nMoneySupply=%s, nFlags=(%s)(%d)(%s), nStakeModifier=%016"PRI64x", nStakeModifierChecksum=%08x, hashProofOfStake=%s, prevoutStake=(%s), nStakeTime=%d merkle=%s, hashBlock=%s)",
+        return strprintf("CBlockIndex(nprev=%p, pnext=%p, nFile=%u, nBlockPos=%-6d nHeight=%d, nBlitz=%s, nMoneySupply=%s, nFlags=(%s)(%d)(%s), nStakeModifier=%016"PRI64x", nStakeModifierChecksum=%08x, hashProofOfStake=%s, prevoutStake=(%s), nStakeTime=%d merkle=%s, hashBlock=%s)",
             pprev, pnext, nFile, nBlockPos, nHeight,
-            FormatMoney(nMint).c_str(), FormatMoney(nMoneySupply).c_str(),
+            FormatMoney(nBlitz).c_str(), FormatMoney(nMoneySupply).c_str(),
             GeneratedStakeModifier() ? "MOD" : "-", GetStakeEntropyBit(), IsProofOfStake()? "PoS" : "PoW",
             nStakeModifier, nStakeModifierChecksum, 
             hashProofOfStake.ToString().c_str(),
@@ -1377,7 +1377,7 @@ public:
         READWRITE(nFile);
         READWRITE(nBlockPos);
         READWRITE(nHeight);
-        READWRITE(nMint);
+        READWRITE(nBlitz);
         READWRITE(nMoneySupply);
         READWRITE(nFlags);
         READWRITE(nStakeModifier);

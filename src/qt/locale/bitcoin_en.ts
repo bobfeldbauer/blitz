@@ -1910,8 +1910,8 @@ Address: %4
     </message>
     <message>
         <location line="+2"/>
-        <source>Minted</source>
-        <translation>Minted</translation>
+        <source>Blitzed</source>
+        <translation>Blitzed</translation>
     </message>
     <message>
         <location line="+38"/>
@@ -2004,8 +2004,8 @@ Address: %4
     </message>
     <message>
         <location line="+1"/>
-        <source>Minted</source>
-        <translation>Minted</translation>
+        <source>Blitzed</source>
+        <translation>Blitzed</translation>
     </message>
     <message>
         <location line="+1"/>
